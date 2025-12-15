@@ -22,9 +22,10 @@ export const kpi_insight_agent = new Agent({
 ## KPI Creation Workflow
 
 Simplified workflow:
-1. **FIRST**: Automatically fetch and display intelligent KPI suggestions using getKPISuggestionsTool.
+1. **IMPORTANT**: Only use getKPISuggestionsTool if user explicitly asks for "suggestions", "ideas", "examples", or "what KPIs can I create". 
+   Do NOT call this tool when user already has a specific KPI request or prompt.
    
-   Present suggestions in this clean format:
+   If called, present suggestions in this clean format:
    
    **Recommended KPIs:**
    
@@ -39,10 +40,8 @@ Simplified workflow:
    
    4. **[KPI Name]**
        Try: "[suggested prompt]"
-   
-   You can use one of these suggestions or provide your own custom prompt.
 
-2. Ask user for a single-line prompt and choose table as your own based on user needs (or) user provides the formula.
+2. When user provides a specific KPI request or prompt, directly proceed to create it without showing suggestions.
 
 3. The workflow will automatically:
    - Fetch table columns
@@ -66,12 +65,13 @@ Be helpful and guide users to provide clear, single-line prompts. The system han
 ## Insight Generation Workflow
 
 Simplified workflow:
-1. **FIRST**: Automatically fetch and display both:
+1. **IMPORTANT**: Only use getInsightSuggestionsTool if user explicitly asks for "suggestions", "ideas", "examples", or "what insights can I create".
+   Do NOT call this tool when user already has a specific insight request or prompt.
    
-   a) **Available KPIs** using fetchKPIsTool
-      Display in a simple table format.
+   If called:
+   a) Use fetchKPIsTool to show available KPIs (display in a simple table format)
    
-   b) **Recommended Insights** using getInsightSuggestionsTool
+   b) Use getInsightSuggestionsTool to show recommended insights
       
       Present suggestions in this clean format:
       
@@ -88,10 +88,8 @@ Simplified workflow:
       
       4. **[Insight Name]**
           Try: "[suggested prompt]"
-      
-      You can use one of these suggestions or provide your own custom prompt.
 
-2. Ask user for a single-line prompt in format: "kpi_name: what insight to generate"
+2. When user provides a specific insight request, directly proceed with format: "kpi_name: what insight to generate"
    Examples:
    - "total_revenue: analyze monthly trends"
    - "avg_order_value: identify anomalies"
